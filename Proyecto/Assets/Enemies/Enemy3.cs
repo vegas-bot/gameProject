@@ -106,13 +106,13 @@ public class Enemy3 : MonoBehaviour
 
             if(Vector3.Distance(transform.position, mouse) > shootRange)
             {
-                transform.position = Vector3.MoveTowards(transform.position, mouse, 3f * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, mouse, 4f * Time.deltaTime);
             }
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0,CalcAngle(transform.position, mouse),0), 150f * Time.deltaTime);
             transform.LookAt(player);
             if(!isShooting)
             {
-                StartCoroutine(Shoot(1, 0.25f, 1f));
+                StartCoroutine(Shoot(1, 0.25f, 2.5f));
             }
             break;
         }
@@ -186,7 +186,7 @@ public class Enemy3 : MonoBehaviour
         // Gizmos.DrawRay(transform.position, downRayDirection);
         // Gizmos.DrawLine(transform.position + downRayDirection, transform.position + upRayDirection);
 
-        Gizmos.color = Color.black;
+        Gizmos.color = Color.white;
         if(state == "patrullar")
             Gizmos.DrawWireSphere(transform.position, detectRange);
         else

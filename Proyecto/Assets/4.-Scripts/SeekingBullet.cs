@@ -4,36 +4,39 @@ using UnityEngine;
 
 public class SeekingBullet : SBAgent
 {
-    public SeekingBullet(bool _useMouse, Transform _player = null)
+    public SeekingBullet(Transform _player)
     {
-        useMouse = _useMouse;
         player = _player;
     }
     public Vector3 target;
-    public bool useMouse;
     public Transform player;
+    public float targetTime;
 
     void Start()
     {
         maxSpeed = 20f;
         maxSteer = 1f;
+        targetTime = 2f;
     }
 
     void Update()
     {
-        Vector3 mouse;
-        if(useMouse){
-            mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            target = new Vector3(mouse.x, mouse.y);
+        if(targetTime > 0f){
+            target = player.position;
+            transform.LookAt(target);
         }
         else
-            target = player.position;
+            target = transform.position + transform.forward;
+
 
         velocity += SteeringBehaviours.Seek(this, target, .5f);
         transform.position += velocity * Time.deltaTime;
 
         if((target-transform.position).sqrMagnitude < .25f)
             Destroy(gameObject);
+
+        targetTime -= Time.deltaTime;
+        Debug.Log(targetTime);
     }
 
     void OnDrawGizmos() 

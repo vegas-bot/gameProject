@@ -32,7 +32,7 @@ public class enemy2v3 : MonoBehaviour
         lifebar.value = life;
 
         //Accion
-        if (Vector3.Distance(transform.position, Player.transform.position) < 20f)
+        if (Vector3.Distance(transform.position, Player.transform.position) < 80f)
         {
             apuntar();
             print("shoot");
@@ -72,7 +72,7 @@ public class enemy2v3 : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, 20f);
+        Gizmos.DrawWireSphere(transform.position, 80f);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(aim, 0.2f);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy6 : SBAgent
 {
     public float detectRange = 3f;
-    private float shootRange = 25f;
+    public float shootRange = 30f;
     private string state = "detect";
     private float reloadTime = 2f;
     private bool canShoot = false;
@@ -43,10 +43,18 @@ public class Enemy6 : SBAgent
                 }
                 break;
             case "shoot" :
-                if((mouse - transform.position).sqrMagnitude > shootRange * shootRange)
+                if((mouse - transform.position).sqrMagnitude > (shootRange + 1f) * (shootRange + 1f))
+                {
+                    maxSteer = 1f;
                     velocity += SteeringBehaviours.Seek(this, mouse, shootRange);
-                else
+                }
+                else if((mouse - transform.position).sqrMagnitude < (shootRange - 1f) * (shootRange - 1f))
+                {
+                    maxSteer  = 1f;
                     velocity += SteeringBehaviours.Flee(this, mouse, shootRange);
+                }
+                else
+                    maxSteer = 0;
 
                 transform.position += velocity * Time.deltaTime;
                 if(canShoot)
@@ -60,8 +68,6 @@ public class Enemy6 : SBAgent
     {
         GameObject bala = Instantiate(bullet, transform.position, Quaternion.identity, bulletStorage);
         bala.name = "bullet" + bulletCount.ToString("00");
-        bala.transform.SetParent(gameObject.transform);
-        bala.GetComponent<SeekingBullet>().useMouse = false;
         bala.GetComponent<SeekingBullet>().player = player;
         bulletCount++;
         StartCoroutine(Reload());
@@ -76,8 +82,11 @@ public class Enemy6 : SBAgent
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectRange);
+        if(state == "detect")
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, detectRange);
+        }
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, shootRange);
     }

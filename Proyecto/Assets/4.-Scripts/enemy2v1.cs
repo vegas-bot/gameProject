@@ -33,7 +33,7 @@ public class enemy2v1 : MonoBehaviour
     {
         lifebar.value = life;
         //Accion
-        if (Vector3.Distance(transform.position,Player.transform.position) < 20f)
+        if (Vector3.Distance(transform.position,Player.transform.position) < 80f)
         {
             apuntar();
             timer += Time.deltaTime;
@@ -64,8 +64,8 @@ public class enemy2v1 : MonoBehaviour
 
         angulo = Mathf.Atan2(Z,X) * Mathf.Rad2Deg;
 
-        posX = 20 * Mathf.Cos(angulo * Mathf.Deg2Rad);
-        posZ = 20 * Mathf.Sin(angulo * Mathf.Deg2Rad);
+        posX = 40 * Mathf.Cos(angulo * Mathf.Deg2Rad);
+        posZ = 40 * Mathf.Sin(angulo * Mathf.Deg2Rad);
 
         aim = new Vector3(transform.position.x + posX,Player.transform.position.y , transform.position.z + posZ);
         transform.rotation = Quaternion.Euler(-90, transform.rotation.y - angulo, 0);
@@ -73,7 +73,7 @@ public class enemy2v1 : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, 20f);
+        Gizmos.DrawWireSphere(transform.position, 80f);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(aim, 0.2f);

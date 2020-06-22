@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy7 : SBAgent
 {
-    private float detectionRadius = 10f;
+    private float detectionRadius = 25f;
     private string state = "patrol";
     public Transform target;
     public Transform enemy;
@@ -15,7 +15,7 @@ public class Enemy7 : SBAgent
     void Start()
     {
         initPos = transform.position;
-        maxSpeed = 2f;
+        maxSpeed = 10f;
     }
 
     void Update()
@@ -26,6 +26,8 @@ public class Enemy7 : SBAgent
         switch(state)
         {
             case "patrol" : 
+                Renderer ren1 = GetComponent<Renderer>();
+                ren1.sharedMaterial.color = Color.green;
                 velocity = Vector3.zero;
                 if((mouse - transform.position).sqrMagnitude < detectionRadius * detectionRadius)
                 {
@@ -36,6 +38,8 @@ public class Enemy7 : SBAgent
                 }
             break;
             case "detect" :
+                Renderer ren = GetComponent<Renderer>();
+                ren.sharedMaterial.color = Color.red;
                 float range = target.GetComponent<Enemy6>().detectRange;
                 velocity += SteeringBehaviours.Seek(this, target.position, range);
                 if((target.position - transform.position).sqrMagnitude < range * range)
@@ -46,6 +50,7 @@ public class Enemy7 : SBAgent
                 }
             break;
             case "reset" : 
+            
                 velocity += SteeringBehaviours.Seek(this, target.position, .5f);
                 if((target.position - transform.position).sqrMagnitude < .25f)
                 {
