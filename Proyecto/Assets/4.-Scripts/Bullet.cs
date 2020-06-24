@@ -29,8 +29,14 @@ public class Bullet : MonoBehaviour
         transform.position += new Vector3(speedX, 0, speedZ) * Time.deltaTime;
     }
 
+    void OnTriggerEnter(Collider other) {
+        if(other.gameObject.tag == "Player")
+        Destroy(gameObject);
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 1f);
     }
+
 }

@@ -1580,7 +1580,7 @@ Camera:
   far clip plane: 1000
   field of view: 50
   orthographic: 1
-  orthographic size: 27.36
+  orthographic size: 32
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1963,7 +1963,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!65 &2136444853
 BoxCollider:
@@ -2518,6 +2518,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8494561081449050969, guid: 285735b022856bc49aababf47a79a344,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8729057576002826751, guid: 285735b022856bc49aababf47a79a344,
         type: 3}
       propertyPath: cam
@@ -2536,7 +2541,7 @@ PrefabInstance:
     - target: {fileID: 9126948031349959139, guid: 285735b022856bc49aababf47a79a344,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -167.6
+      value: -70.6
       objectReference: {fileID: 0}
     - target: {fileID: 9126948031349959139, guid: 285735b022856bc49aababf47a79a344,
         type: 3}

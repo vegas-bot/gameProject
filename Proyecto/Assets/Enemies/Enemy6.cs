@@ -19,6 +19,7 @@ public class Enemy6 : SBAgent
     public bool initDestroy = false;
     private int bulletCount = 0;
 
+
     void Start()
     {
     }
@@ -26,12 +27,9 @@ public class Enemy6 : SBAgent
 
     void Update()
     {
+
         Vector3 mouse;
-        if(useMouse){
-            mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouse = new Vector3(mouse.x, mouse.y);
-        }else
-            mouse = player.position;
+        mouse = player.position;
 
         switch(state)
         {
@@ -43,6 +41,7 @@ public class Enemy6 : SBAgent
                 }
                 break;
             case "shoot" :
+
                 if((mouse - transform.position).sqrMagnitude > (shootRange + 1f) * (shootRange + 1f))
                 {
                     maxSteer = 1f;
@@ -61,7 +60,6 @@ public class Enemy6 : SBAgent
                     Shoot();
                 break;
         }
-        
     }
 
     void Shoot()
